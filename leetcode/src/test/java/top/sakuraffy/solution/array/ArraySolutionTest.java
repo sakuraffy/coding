@@ -5,6 +5,10 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ArraySolutionTest {
@@ -44,5 +48,29 @@ class ArraySolutionTest {
         assertEquals(4, result1);
         final int result2 = arraySolutionUnderTest.countPairs(new int[]{1, 1, 1, 3, 3, 3, 7});
         assertEquals(15, result2);
+    }
+
+    @Test
+    void testMinSubarray() {
+        final int result1 = arraySolutionUnderTest.minSubarray(new int[]{3, 1, 4, 2}, 6);
+        assertEquals(1, result1);
+        final int result2 = arraySolutionUnderTest.minSubarray(new int[]{6, 3, 5, 2}, 9);
+        assertEquals(2, result2);
+        final int result3 = arraySolutionUnderTest.minSubarray(new int[]{1, 2, 3}, 3);
+        assertEquals(0, result3);
+        final int result4 = arraySolutionUnderTest.minSubarray(new int[]{1, 2, 3}, 7);
+        assertEquals(-1, result2);
+        final int result5 = arraySolutionUnderTest.minSubarray(new int[]{1000000000, 1000000000, 1000000000}, 3);
+        assertEquals(0, result2);
+    }
+
+    @Test
+    void testThreeSum() {
+        final List<List<Integer>> result1 = arraySolutionUnderTest.threeSum(new int[]{-1, 0, 1, 2, -1, -4});
+        assertEquals(Arrays.asList(Arrays.asList(-1, -1, 2), Arrays.asList(-1, 0, 1)), result1);
+        final List<List<Integer>> result2 = arraySolutionUnderTest.threeSum(new int[]{});
+        assertEquals(new ArrayList<Integer>(), result2);
+        final List<List<Integer>> result3 = arraySolutionUnderTest.threeSum(new int[]{0});
+        assertEquals(new ArrayList<Integer>(), result3);
     }
 }

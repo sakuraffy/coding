@@ -1,9 +1,6 @@
 package top.sakuraffy.solution.array;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Stack;
-import java.util.TreeSet;
+import java.util.*;
 
 /**
  * @author 数组相关解题
@@ -101,5 +98,67 @@ public class ArraySolution {
             map.put(nums[i], map.getOrDefault(nums[i], 0) + 1);
         }
         return ans;
+    }
+
+    public int minSubarray(int[] nums, int p) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+        int mod = 0;
+        for (int num : nums) {
+            mod = (mod + num) % p;
+        }
+
+        if (mod == 0) {
+            return 0;
+        }
+
+        Map<Integer, Integer> pos = new HashMap<>();
+        pos.put(0, -1);
+        int againMod = 0;
+        int min = nums.length;
+        for (int i = 0; i < nums.length; ++i) {
+            againMod = (againMod + nums[i]) % p;
+            int comp = (p - mod + againMod) % p;
+            if (pos.containsKey(comp)) {
+                min = Math.min(min, i - pos.get(comp));
+            }
+            pos.put(againMod, i);
+        }
+        return min >= nums.length ? -1 : min;
+    }
+
+    public List<List<Integer>> threeSum(int[] nums) {
+        List<List<Integer>> res = new ArrayList<>();
+        if (nums == null || nums.length < 2) {
+            return res;
+        }
+
+        Arrays.sort(nums);
+        for (int i = 0; i < nums.length - 2; i++) {
+            if (i > 0 && nums[i] == nums[i - 1]) {
+                continue;
+            }
+            int left = i + 1;
+            int right = nums.length - 1;
+            while (left < right) {
+                int sum = nums[i] + nums[left] + nums[right];
+                if (sum == 0) {
+                    res.add(Arrays.asList(nums[i], nums[left++], nums[right--]));
+                    while(left < right && nums[left - 1] == nums[left]) {
+                        left++;
+                    }
+                    while(left < right && nums[right + 1] == nums[right]) {
+                        right--;
+                    }
+                } else if (sum < 0) {
+                    left++;
+                } else {
+                    right--;
+                }
+            }
+        }
+
+        return res;
     }
 }
