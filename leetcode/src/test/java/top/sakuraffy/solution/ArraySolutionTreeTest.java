@@ -1,7 +1,5 @@
-package top.sakuraffy.solution.array;
+package top.sakuraffy.solution;
 
-import com.sun.xml.internal.ws.policy.AssertionValidationProcessor;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +9,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ArraySolutionTest {
+class ArraySolutionTreeTest {
 
     private ArraySolution arraySolutionUnderTest;
 
@@ -59,18 +57,20 @@ class ArraySolutionTest {
         final int result3 = arraySolutionUnderTest.minSubarray(new int[]{1, 2, 3}, 3);
         assertEquals(0, result3);
         final int result4 = arraySolutionUnderTest.minSubarray(new int[]{1, 2, 3}, 7);
-        assertEquals(-1, result2);
+        assertEquals(-1, result4);
         final int result5 = arraySolutionUnderTest.minSubarray(new int[]{1000000000, 1000000000, 1000000000}, 3);
-        assertEquals(0, result2);
+        assertEquals(0, result5);
     }
 
     @Test
-    void testThreeSum() {
-        final List<List<Integer>> result1 = arraySolutionUnderTest.threeSum(new int[]{-1, 0, 1, 2, -1, -4});
-        assertEquals(Arrays.asList(Arrays.asList(-1, -1, 2), Arrays.asList(-1, 0, 1)), result1);
-        final List<List<Integer>> result2 = arraySolutionUnderTest.threeSum(new int[]{});
-        assertEquals(new ArrayList<Integer>(), result2);
-        final List<List<Integer>> result3 = arraySolutionUnderTest.threeSum(new int[]{0});
-        assertEquals(new ArrayList<Integer>(), result3);
+    void testInvalidTransactions() {
+//        final List<String> result1 = arraySolutionUnderTest.invalidTransactions(new String[]{"alice,20,800,mtv", "alice,50,100,beijing"});
+//        assertEquals(Arrays.asList("alice,20,800,mtv", "alice,50,100,beijing"), result1);
+//        final List<String> result2 = arraySolutionUnderTest.invalidTransactions(new String[]{"alice,20,800,mtv", "alice,50,1200,mtv"});
+//        assertEquals(Arrays.asList("alice,50,1200,mtv"), result2);
+//        final List<String> result3 = arraySolutionUnderTest.invalidTransactions(new String[]{"alice,20,800,mtv", "bob,50,1200,mtv"});
+//        assertEquals(Arrays.asList("bob,50,1200,mtv"), result3);
+        final List<String> result4 = arraySolutionUnderTest.invalidTransactions(new String[]{"alice,20,800,mtv", "alice,50,100,mtv", "alice,51,100,frankfurt"});
+        assertEquals(Arrays.asList("alice,20,800,mtv", "alice,50,100,mtv", "alice,51,100,frankfurt"), result4);
     }
 }
