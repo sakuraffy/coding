@@ -1,6 +1,9 @@
-package top.sakuraffy.solution.array;
+package top.sakuraffy.solution;
+
+import top.sakuraffy.solution.entity.TransactionEntity;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author 数组相关解题
@@ -108,11 +111,9 @@ public class ArraySolution {
         for (int num : nums) {
             mod = (mod + num) % p;
         }
-
         if (mod == 0) {
             return 0;
         }
-
         Map<Integer, Integer> pos = new HashMap<>();
         pos.put(0, -1);
         int againMod = 0;
@@ -128,34 +129,46 @@ public class ArraySolution {
         return min >= nums.length ? -1 : min;
     }
 
-    public List<List<Integer>> threeSum(int[] nums) {
-        List<List<Integer>> res = new ArrayList<>();
-        if (nums == null || nums.length < 2) {
-            return res;
+    public List<String> invalidTransactions(String[] transactions) {
+        if (transactions == null || transactions.length == 0) {
+            return new ArrayList<>();
         }
 
-        Arrays.sort(nums);
-        for (int i = 0; i < nums.length - 2; i++) {
-            if (i > 0 && nums[i] == nums[i - 1]) {
-                continue;
-            }
-            int left = i + 1;
-            int right = nums.length - 1;
+        Map<String, List<TransactionEntity>> map = new HashMap<>();
+        for (String transaction : transactions) {
+            String[] arr = transaction.split(",");
+            List<TransactionEntity> list = map.getOrDefault(arr[0], new ArrayList<>());
+            list.add(new TransactionEntity(arr[0], Integer.parseInt(arr[1]), Integer.parseInt(arr[2]), arr[3]));
+            map.put(arr[0], list);
+        }
+
+        List<String> res = new ArrayList<>();
+        final int MAX_AMOUNT = 1_000;
+        final int TIME_LIMIT = 60;
+        for (List<TransactionEntity> list : map.values()) {
+            list.sort(Comparator.comparingInt(TransactionEntity::getTime));
+            int left = 0;
+            int right = left + 1;
+
             while (left < right) {
-                int sum = nums[i] + nums[left] + nums[right];
-                if (sum == 0) {
-                    res.add(Arrays.asList(nums[i], nums[left++], nums[right--]));
-                    while(left < right && nums[left - 1] == nums[left]) {
-                        left++;
+                if (list.get(left).getAmount() > MAX_AMOUNT) {
+                    if (!res.contains(list.get(left))) {
+                        res.add(list.get(left).toString());
                     }
-                    while(left < right && nums[right + 1] == nums[right]) {
-                        right--;
-                    }
-                } else if (sum < 0) {
-                    left++;
-                } else {
-                    right--;
                 }
+                while (left < right && right < list.size() && list.get(right).getTime() - list.get(left).getTime() <= TIME_LIMIT) {
+                    if (!list.get(right).getCity().equals(list.get(left).getCity())) {
+                        if (!res.contains(list.get(left).toString())) {
+                            res.add(list.get(left).toString());
+                        }
+                        if (!res.contains(list.get(right).toString())) {
+                            res.add(list.get(right).toString());
+                        }
+                    }
+                    right++;
+                }
+                right = Math.min(right + 1, list.size() - 1);
+                left++;
             }
         }
 
