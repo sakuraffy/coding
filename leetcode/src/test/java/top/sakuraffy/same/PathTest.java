@@ -43,15 +43,13 @@ class PathTest {
     }
 
     @Test
-    void testMaxPathSum1() {
-        // Setup
-        final TreeNode root = new TreeNode(0);
-
-        // Run the test
+    void testMaxPathSum() {
+        final TreeNode root = TreeNode.create(Arrays.asList(1,2,3));
         final int result = pathUnderTest.maxPathSum(root);
-
-        // Verify the results
-        assertEquals(0, result);
+        assertEquals(6, result);
+        final TreeNode root2 = TreeNode.create(Arrays.asList(-10,9,20,null,null,15,7));
+        final int result2 = pathUnderTest.maxPathSum(root2);
+        assertEquals(42, result2);
     }
 
     @Test
@@ -70,14 +68,12 @@ class PathTest {
 
     @Test
     void testMinFallingPathSum() {
-        // Setup
-        final int[][] matrix = new int[][]{{0}};
-
-        // Run the test
-        final int result = pathUnderTest.minFallingPathSum(matrix);
-
-        // Verify the results
-        assertEquals(0, result);
+        final int[][] matrix1 = new int[][]{{2,1,3},{6,5,4},{7,8,9}};
+        final int result1 = pathUnderTest.minFallingPathSum(matrix1);
+        assertEquals(13, result1);
+        final int[][] matrix2 = new int[][]{{-19,57},{-40,-5}};
+        final int result2 = pathUnderTest.minFallingPathSum(matrix2);
+        assertEquals(-59, result2);
     }
 
     @Test
@@ -89,14 +85,10 @@ class PathTest {
 
     @Test
     void testLongestUnivaluePath() {
-        // Setup
-        final TreeNode root = new TreeNode(0);
-
-        // Run the test
-        final int result = pathUnderTest.longestUnivaluePath(root);
-
-        // Verify the results
-        assertEquals(0, result);
+        final int result1 = pathUnderTest.longestUnivaluePath(TreeNode.create(Arrays.asList(5,4,5,1,1,5)));
+        assertEquals(2, result1);
+        final int result2 = pathUnderTest.longestUnivaluePath(TreeNode.create(Arrays.asList(1,4,5,4,4,5)));
+        assertEquals(2, result2);
     }
 
     @Test

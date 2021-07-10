@@ -241,7 +241,30 @@ public class Path {
      * @return
      */
     public int minFallingPathSum(int[][] matrix) {
-        return 0;
+        if (matrix == null) {
+            return 0;
+        }
+        int[][] dp = new int[matrix.length][matrix[0].length];
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                if (i == 0) {
+                    dp[i][j] = matrix[i][j];
+                } else {
+                    if (j - 1 < 0) {
+                        dp[i][j] = matrix[i][j] + Math.min(dp[i - 1][j], dp[i - 1][j + 1]);
+                    } else if (j + 1 >= matrix[0].length) {
+                        dp[i][j] = matrix[i][j] + Math.min(dp[i - 1][j], dp[i - 1][j - 1]);
+                    } else {
+                        dp[i][j] = matrix[i][j] + Math.min(dp[i - 1][j - 1], Math.min(dp[i - 1][j], dp[i - 1][j + 1]));
+                    }
+                }
+            }
+        }
+        int res = Integer.MAX_VALUE;
+        for (int j = 0; j < dp[0].length; j++) {
+            res = Math.min(res, dp[dp.length - 1][j]);
+        }
+        return res;
     }
 
     /**
@@ -285,20 +308,18 @@ public class Path {
             return empty == 0 ? 1 : 0;
         }
 
-        int res = 0;
-
         empty--;
         grid[i][j] = -2;
 
-        res += uniquePathsIII(grid, i + 1, j, empty);
-        res += uniquePathsIII(grid, i - 1, j, empty);
-        res += uniquePathsIII(grid, i, j + 1, empty);
-        res += uniquePathsIII(grid, i, j - 1, empty);
+        int up = uniquePathsIII(grid, i, j - 1, empty);
+        int down = uniquePathsIII(grid, i, j + 1, empty);
+        int left = uniquePathsIII(grid, i - 1, j, empty);
+        int right = uniquePathsIII(grid, i + 1, j, empty);
 
         empty++;
         grid[i][j] = 0;
 
-        return res;
+        return up + down + left + right;
     }
 
     /**
@@ -307,7 +328,22 @@ public class Path {
      * @return
      */
     public int longestUnivaluePath(TreeNode root) {
-        return 0;
+        if (root == null) {
+            return 0;
+        }
+
+        return Math.max(longestUnivaluePath(root, -1),
+                Math.max(longestUnivaluePath(root.left), longestUnivaluePath(root.right)));
+    }
+
+    private int longestUnivaluePath(TreeNode node, Integer parentValue) {
+        if (node == null) {
+            return 0;
+        }
+        int left = longestUnivaluePath(node.left, node.val);
+        int right = longestUnivaluePath(node.right, node.val);
+
+        return left + right + node.val == parentValue ? 1 : 0;
     }
 
     /**
