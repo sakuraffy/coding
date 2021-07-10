@@ -5,7 +5,7 @@ package top.sakuraffy.bean;
  * @author Sakuraffy
  * @date 2021/7/7 21:26
  */
-interface BeanDefinition {
+public interface BeanDefinition {
     /**
      * get bean id
      * @return

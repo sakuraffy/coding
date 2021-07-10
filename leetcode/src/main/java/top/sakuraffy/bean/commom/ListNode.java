@@ -1,4 +1,4 @@
-package top.sakuraffy.commom;
+package top.sakuraffy.bean.commom;
 
 import java.util.ArrayList;
 import java.util.List;

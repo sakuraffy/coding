@@ -5,7 +5,7 @@ package top.sakuraffy.exception;
  * @author Sakuraffy
  * @date 2021/7/7 23:06
  */
-public class BeanDefinitionException extends Throwable {
+public class BeanDefinitionException extends BeanException {
 
     public BeanDefinitionException(String message) {
         super(message);

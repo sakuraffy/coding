@@ -1,8 +1,8 @@
-package top.sakuraffy.same;
+package top.sakuraffy.bean.same;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import top.sakuraffy.commom.TreeNode;
+import top.sakuraffy.bean.commom.TreeNode;
 
 import java.util.Arrays;
 import java.util.List;

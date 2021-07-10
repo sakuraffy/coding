@@ -1,6 +1,6 @@
-package top.sakuraffy.same;
+package top.sakuraffy.bean.same;
 
-import top.sakuraffy.commom.TreeNode;
+import top.sakuraffy.bean.commom.TreeNode;
 
 import java.util.*;
 

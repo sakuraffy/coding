@@ -1,4 +1,4 @@
-package top.sakuraffy.same;
+package top.sakuraffy.bean.same;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

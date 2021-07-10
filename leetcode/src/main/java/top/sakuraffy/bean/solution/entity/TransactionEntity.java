@@ -1,4 +1,4 @@
-package top.sakuraffy.solution.entity;
+package top.sakuraffy.bean.solution.entity;
 
 public class TransactionEntity {
     private String name;

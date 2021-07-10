@@ -1,4 +1,4 @@
-package top.sakuraffy.same;
+package top.sakuraffy.bean.same;
 
 import java.util.*;
 

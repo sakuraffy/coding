@@ -1,4 +1,4 @@
-package top.sakuraffy.solution;
+package top.sakuraffy.bean.solution;
 
 import java.util.Stack;
 

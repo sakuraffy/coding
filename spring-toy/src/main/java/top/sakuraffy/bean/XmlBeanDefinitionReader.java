@@ -1,19 +1,14 @@
 package top.sakuraffy.bean;
 
-import org.apache.commons.lang.StringUtils;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
-import top.sakuraffy.bean.BeanDefinitionReader;
-import top.sakuraffy.bean.BeanFactory;
-import top.sakuraffy.bean.Resource;
 import top.sakuraffy.exception.BeanDefinitionException;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Iterator;
-import java.util.NoSuchElementException;
 
 import static com.sun.org.apache.xml.internal.security.utils.Constants.configurationFile;
 
@@ -38,7 +33,7 @@ public class XmlBeanDefinitionReader implements BeanDefinitionReader {
      * @throws BeanDefinitionException
      */
     @Override
-    public void loadBeanDefinitionResource(Resource resource) throws BeanDefinitionException {
+    public void loadBeanDefinitionResource(Resource resource) {
         try {
             InputStream is = resource.getInputStream();
             SAXReader reader = new SAXReader();

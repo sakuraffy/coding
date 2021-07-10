@@ -1,7 +1,7 @@
-package top.sakuraffy.solution.tree;
+package top.sakuraffy.bean.solution.tree;
 
-import top.sakuraffy.commom.ListNode;
-import top.sakuraffy.commom.TreeNode;
+import top.sakuraffy.bean.commom.ListNode;
+import top.sakuraffy.bean.commom.TreeNode;
 
 import java.util.*;
 

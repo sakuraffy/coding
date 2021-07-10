@@ -1,12 +1,10 @@
-package top.sakuraffy.solution.tree;
+package top.sakuraffy.bean.solution.tree;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import top.sakuraffy.commom.ListNode;
-import top.sakuraffy.commom.TreeNode;
+import top.sakuraffy.bean.commom.ListNode;
+import top.sakuraffy.bean.commom.TreeNode;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 

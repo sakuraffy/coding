@@ -7,8 +7,8 @@ package top.sakuraffy.bean;
 public interface BeanFactory {
     /**
      * 获取Bean
-     * @param name
+     * @param beanId
      * @return
      */
-    Object getBean(String name);
+    Object getBean(String beanId);
 }

@@ -1,11 +1,8 @@
-package top.sakuraffy.solution;
+package top.sakuraffy.bean.solution;
 
-import top.sakuraffy.solution.entity.TransactionEntity;
-
-import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
+import top.sakuraffy.bean.solution.entity.TransactionEntity;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * @author 数组相关解题

@@ -1,7 +1,5 @@
 package top.sakuraffy.bean;
 
-import top.sakuraffy.bean.BeanDefinitionRegistry;
-
 /**
  * @author Sakuraffy
  * @date 2021/7/7 21:15
