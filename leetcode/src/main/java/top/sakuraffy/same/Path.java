@@ -1,5 +1,14 @@
 package top.sakuraffy.same;
 
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.beans.factory.config.SingletonBeanRegistry;
+import org.springframework.beans.factory.support.AbstractBeanFactory;
+import org.springframework.beans.factory.support.BeanDefinitionRegistry;
+import org.springframework.beans.factory.support.DefaultSingletonBeanRegistry;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.support.GenericApplicationContext;
 import top.sakuraffy.commom.TreeNode;
 
 import java.util.*;
@@ -347,12 +356,48 @@ public class Path {
     }
 
     /**
-     * 二进制矩阵中的最短路径(可斜着走)
+     * 二进制矩阵中的最短路径(八个方向)
      * @param grid
      * @return
      */
     public int shortestPathBinaryMatrix(int[][] grid) {
-        return 0;
+        if (grid == null) {
+            return 0;
+        }
+        int[] res = new int[]{Integer.MAX_VALUE};
+        shortestPathBinaryMatrix(grid, 0, 0, 0, res);
+        return res[0] == Integer.MAX_VALUE ? -1 : res[0];
+    }
+
+    /**
+     * 二进制矩阵中的最短路径(八个方向)
+     * @param grid
+     * @param i
+     * @param j
+     * @param depth
+     * @param res
+     */
+    private void shortestPathBinaryMatrix(int[][] grid, int i, int j, int depth, int[] res) {
+        if (i < 0 || j < 0 || i >= grid.length || j >= grid[0].length || grid[i][j] != 0) {
+            return;
+        }
+
+        if (i == grid.length - 1 && j == grid[0].length - 1) {
+            res[0] = Math.min(res[0], depth);
+            return;
+        }
+
+        grid[i][j] = -1;
+
+        shortestPathBinaryMatrix(grid, i, j - 1, depth + 1, res);
+        shortestPathBinaryMatrix(grid, i, j + 1, depth + 1, res);
+        shortestPathBinaryMatrix(grid, i - 1, j, depth + 1, res);
+        shortestPathBinaryMatrix(grid, i + 1, j, depth + 1, res);
+        shortestPathBinaryMatrix(grid, i - 1, j - 1, depth + 1, res);
+        shortestPathBinaryMatrix(grid, i - 1, j + 1, depth + 1, res);
+        shortestPathBinaryMatrix(grid, i + 1, j - 1, depth + 1, res);
+        shortestPathBinaryMatrix(grid, i + 1, j + 1, depth + 1, res);
+        grid[i][j] = 1;
     }
 
     /**

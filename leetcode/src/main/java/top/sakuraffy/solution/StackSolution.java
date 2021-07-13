@@ -1,7 +1,5 @@
 package top.sakuraffy.solution;
 
-import java.util.Stack;
-
 /**
  * @program: coding
  * @description: 栈

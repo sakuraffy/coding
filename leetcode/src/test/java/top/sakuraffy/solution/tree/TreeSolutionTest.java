@@ -2,11 +2,9 @@ package top.sakuraffy.solution.tree;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import top.sakuraffy.commom.ListNode;
 import top.sakuraffy.commom.TreeNode;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 

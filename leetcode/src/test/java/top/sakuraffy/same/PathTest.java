@@ -93,14 +93,15 @@ class PathTest {
 
     @Test
     void testShortestPathBinaryMatrix() {
-        // Setup
-        final int[][] grid = new int[][]{{0}};
-
-        // Run the test
-        final int result = pathUnderTest.shortestPathBinaryMatrix(grid);
-
-        // Verify the results
-        assertEquals(0, result);
+        final int[][] grid1 = new int[][]{{0,0,0}, {1,1,0}, {1,1,0}};
+        final int result1 = pathUnderTest.shortestPathBinaryMatrix(grid1);
+        assertEquals(4, result1);
+        final int[][] grid2 = new int[][]{{1,0,0}, {1,1,0}, {1,1,0}};
+        final int result2 = pathUnderTest.shortestPathBinaryMatrix(grid2);
+        assertEquals(-1, result2);
+        final int[][] grid3 = new int[][]{{0,1}, {1,0}};
+        final int result3 = pathUnderTest.shortestPathBinaryMatrix(grid3);
+        assertEquals(2, result3);
     }
 
     @Test

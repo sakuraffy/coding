@@ -1,9 +1,13 @@
 package top.sakuraffy.solution;
 
+import org.springframework.beans.PropertyValues;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.xml.XmlBeanFactory;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import top.sakuraffy.solution.entity.TransactionEntity;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * @author 数组相关解题

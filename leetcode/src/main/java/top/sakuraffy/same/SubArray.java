@@ -1,5 +1,7 @@
 package top.sakuraffy.same;
 
+import org.springframework.beans.factory.support.DefaultSingletonBeanRegistry;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
@@ -38,7 +40,6 @@ public class SubArray {
             stack.push(i);
             res = (res + dp[i + 1]) % mod;
         }
-
         return res;
     }
 
