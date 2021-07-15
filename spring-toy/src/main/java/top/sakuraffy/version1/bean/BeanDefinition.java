@@ -48,4 +48,10 @@ public interface BeanDefinition {
      * @return
      */
     BeanScope getBeanScope();
+
+    /**
+     * get constructor argument
+     * @return
+     */
+    ConstructorArgument getConstructorArgument();
 }

@@ -26,9 +26,11 @@ public class XmlBeanDefinitionReader implements BeanDefinitionReader {
     public static final String BEAN_ID_ATTRIBUTE = "id";
     public static final String BEAN_CLASS_ATTRIBUTE = "class";
     public static final String BEAN_PROPERTY_ATTRIBUTE = "property";
-    public static final String PROPERTY_NAME_ATTRIBUTE = "name";
-    public static final String PROPERTY_VALUE_ATTRIBUTE = "value";
-    public static final String PROPERTY_REF_ATTRIBUTE = "ref";
+    public static final String BEAN_CONSTRUCTOR_ATTRIBUTE = "constructor-arg";
+    public static final String NAME_ATTRIBUTE = "name";
+    public static final String TYPE_ATTRIBUTE = "type";
+    public static final String VALUE_ATTRIBUTE = "value";
+    public static final String REF_ATTRIBUTE = "ref";
 
     private BeanDefinitionRegistry registry;
 
@@ -70,9 +72,11 @@ public class XmlBeanDefinitionReader implements BeanDefinitionReader {
         String beanId = element.attributeValue(BEAN_ID_ATTRIBUTE);
         String beanClassName = element.attributeValue(BEAN_CLASS_ATTRIBUTE);
         BeanDefinition bd = new GenericBeanDefinition(beanId, beanClassName);
+        parseConstructorElementValue(element, bd);
         parsePropertyElementValue(element, bd);
         this.registry.registerBeanDefinition(beanId, bd);
     }
+
 
     /**
      * 解析Context元素
@@ -91,7 +95,7 @@ public class XmlBeanDefinitionReader implements BeanDefinitionReader {
         Iterator<Element> iterator = element.elementIterator(BEAN_PROPERTY_ATTRIBUTE);
         while (iterator.hasNext()) {
             Element propertyElement = iterator.next();
-            String propertyName = propertyElement.attributeValue(PROPERTY_NAME_ATTRIBUTE);
+            String propertyName = propertyElement.attributeValue(NAME_ATTRIBUTE);
             if (StringUtils.isEmpty(propertyName)) {
                 return;
             }
@@ -102,19 +106,39 @@ public class XmlBeanDefinitionReader implements BeanDefinitionReader {
         }
     }
 
+    /**
+     * 解析Bean构造函数
+     * @param element
+     * @param bd
+     */
+    private void parseConstructorElementValue(Element element, BeanDefinition bd) {
+//        String typeAttr = element.attributeValue(TYPE_ATTRIBUTE);
+//        String nameAttr = element.attributeValue(NAME_ATTRIBUTE);
+//        Object value = parsePropertyElementValue(element, null);
+//        ConstructorArgument.ValueHolder valueHolder = new ConstructorArgument.ValueHolder(value);
+//        if (StringUtils.isNotEmpty(typeAttr)) {
+//            valueHolder.setType(typeAttr);
+//        }
+//        if (StringUtils.isNotEmpty(nameAttr)) {
+//            valueHolder.setName(nameAttr);
+//        }
+//        bd.getConstructorArgument().addArgumentValue(valueHolder);
+    }
+
+
     private Object parsePropertyElementValue(Element propertyElement, String propertyName) {
         String elementName = (propertyName != null) ?
                 "<property> element for property '" + propertyName + "' " : "<constructor-arg> element";
 
-        boolean hasRefAttribute = propertyElement.attribute(PROPERTY_REF_ATTRIBUTE) != null;
-        boolean hasValueAttribute = propertyElement.attribute(PROPERTY_VALUE_ATTRIBUTE) != null;
+        boolean hasRefAttribute = propertyElement.attribute(REF_ATTRIBUTE) != null;
+        boolean hasValueAttribute = propertyElement.attribute(VALUE_ATTRIBUTE) != null;
 
         if (hasRefAttribute) {
-            String refName = propertyElement.attributeValue(PROPERTY_REF_ATTRIBUTE);
+            String refName = propertyElement.attributeValue(REF_ATTRIBUTE);
             RuntimeBeanReference ref = new RuntimeBeanReference(refName);
             return ref;
         } else if (hasValueAttribute) {
-            String value = propertyElement.attributeValue(PROPERTY_VALUE_ATTRIBUTE);
+            String value = propertyElement.attributeValue(VALUE_ATTRIBUTE);
             TypedStringValue valueHolder = new TypedStringValue(value);
             return valueHolder;
         } else {

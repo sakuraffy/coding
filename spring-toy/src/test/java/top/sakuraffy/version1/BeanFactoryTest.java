@@ -11,6 +11,8 @@ import top.sakuraffy.version1.bean.DefaultBeanFactory;
 import top.sakuraffy.version1.bean.Resource;
 import top.sakuraffy.version1.bean.XmlBeanDefinitionReader;
 
+import java.util.Arrays;
+
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -38,5 +40,16 @@ public class BeanFactoryTest {
         OrderService orderService = (OrderService) beanFactory.getBean("orderService");
         assertTrue(orderService.getUserService() instanceof UserService);
         assertEquals(111, orderService.getUserService().getUserId());
+    }
+
+    @Test
+    public void testGetBeanWithArgument() throws BeanDefinitionException {
+        UserService userService1 = (UserService) beanFactory.getBean("userService1");
+        assertTrue(userService1 instanceof UserService);
+        assertTrue(userService1.getUser() instanceof User);
+        assertEquals("sakuraffy", userService1.getUser().getName());
+        assertEquals(222, userService1.getOrderService().getOrderId());
+        assertEquals(123, userService1.getUserId());
+        assertEquals(Arrays.asList("swimming"), userService1.getHobbies());
     }
 }

@@ -15,6 +15,15 @@
         <property name="orderService" ref="orderService"/>
     </bean>
 
+    <bean id="userService1" class="top.sakuraffy.data.UserService">
+        <constructor-arg name="userId" value="123" />
+        <constructor-arg name="user" ref="user" />
+        <constructor-arg name="hobbies">
+            <list><value>swimming</value></list>
+        </constructor-arg>
+        <constructor-arg name="orderService" ref="orderService"></constructor-arg>
+    </bean>
+
     <bean id="orderService" class="top.sakuraffy.data.OrderService">
         <property name="orderId" value="222"></property>
         <property name="userService" ref="userService"/>
