@@ -4,18 +4,18 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="user" class="top.sakuraffy.data.User">
+    <bean id="user" class="top.sakuraffy.data.xml.User">
         <property name="name" value="sakuraffy"/>
         <property name="age" value="25"/>
     </bean>
 
-    <bean id="userService" class="top.sakuraffy.data.UserService">
+    <bean id="userService" class="top.sakuraffy.data.xml.UserService">
         <property name="userId" value="111"/>
         <property name="user" ref="user"/>
         <property name="orderService" ref="orderService"/>
     </bean>
 
-    <bean id="userService1" class="top.sakuraffy.data.UserService">
+    <bean id="userService1" class="top.sakuraffy.data.xml.UserService">
         <constructor-arg name="userId" value="123" />
         <constructor-arg name="user" ref="user" />
         <constructor-arg name="hobbies">
@@ -24,7 +24,7 @@
         <constructor-arg name="orderService" ref="orderService"></constructor-arg>
     </bean>
 
-    <bean id="orderService" class="top.sakuraffy.data.OrderService">
+    <bean id="orderService" class="top.sakuraffy.data.xml.OrderService">
         <property name="orderId" value="222"></property>
         <property name="userService" ref="userService"/>
     </bean>

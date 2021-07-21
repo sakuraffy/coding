@@ -2,19 +2,19 @@ package top.sakuraffy.version1;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import top.sakuraffy.data.OrderService;
-import top.sakuraffy.data.User;
-import top.sakuraffy.data.UserService;
+import top.sakuraffy.data.xml.OrderService;
+import top.sakuraffy.data.xml.User;
+import top.sakuraffy.data.xml.UserService;
 import top.sakuraffy.exception.BeanDefinitionException;
-import top.sakuraffy.version1.bean.ClassPathResource;
-import top.sakuraffy.version1.bean.DefaultBeanFactory;
-import top.sakuraffy.version1.bean.Resource;
-import top.sakuraffy.version1.bean.XmlBeanDefinitionReader;
+import top.sakuraffy.bean.version2.ClassPathResource;
+import top.sakuraffy.bean.version2.DefaultBeanFactory;
+import top.sakuraffy.bean.version2.Resource;
+import top.sakuraffy.bean.version2.XmlBeanDefinitionReader;
 
 import java.util.Arrays;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class BeanFactoryTest {
     private Resource resource;
