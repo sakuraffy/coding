@@ -1,9 +1,11 @@
 package top.sakuraffy.data.annotation;
 
+import org.aspectj.lang.annotation.Aspect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 /**
  * @author: zhangqiushi
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Scope("prototype")
+@Service
 public class Order {
 
     @Autowired

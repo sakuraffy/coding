@@ -8,6 +8,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import top.sakuraffy.solution.entity.TransactionEntity;
 
 import java.util.*;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.locks.*;
 
 /**
  * @author 数组相关解题
@@ -307,5 +309,31 @@ public class ArraySolution {
         result[1] = left;
 
         return result;
+    }
+
+    /**
+     * 子集
+     * @param nums
+     * @return
+     */
+    public List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> result = new ArrayList<>();
+        if (Objects.isNull(nums) || nums.length == 0) {
+            return result;
+        }
+        subsets(nums, 0, new Stack<>(), result);
+        return result;
+    }
+
+    private void subsets(int[] nums, int idx, Stack<Integer> stack, List<List<Integer>> result) {
+        result.add(new ArrayList<>(stack));
+        if (idx == nums.length) {
+            return;
+        }
+        for (int i = idx; i < nums.length; i++) {
+            stack.push(nums[i]);
+            subsets(nums, i + 1, stack, result);
+            stack.pop();
+        }
     }
 }

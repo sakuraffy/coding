@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import top.sakuraffy.commom.ListNode;
 import top.sakuraffy.commom.TreeNode;
+import top.sakuraffy.solution.TreeSolution;
 
 import java.util.Arrays;
 import java.util.List;
@@ -23,7 +24,10 @@ class TreeSolutionTest {
     void testCreate() {
         final TreeNode root = TreeNode.create(Arrays.asList(2, 1, 3));
         assertEquals(Arrays.asList(2,1,3), root.preorder());
+        assertEquals(Arrays.asList(2,1,3), root.preorderWithMirror());
         assertEquals(Arrays.asList(1,2,3), root.inorder());
+        assertEquals(Arrays.asList(1,2,3), root.inorderWithMirror());
+        assertEquals(Arrays.asList(1,3,2), root.postorder());
         assertEquals(Arrays.asList(1,3,2), root.postorder());
     }
 

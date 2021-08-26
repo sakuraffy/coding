@@ -93,4 +93,10 @@ class ArraySolutionTreeTest {
         final int[] result1 = arraySolutionUnderTest.searchRange(new int[]{5,7,7,8,8,10}, 8);
         assertArrayEquals(new int[]{3, 4}, result1);
     }
+
+    @Test
+    void testSubsets() {
+        final List<List<Integer>> result1 = arraySolutionUnderTest.subsets(new int[]{1,2,3,4});
+        System.out.println(result1);
+    }
 }

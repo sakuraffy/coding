@@ -16,12 +16,13 @@ public class StringSolution {
         Map<Character, Integer> map = new HashMap<>();
         int max = Integer.MIN_VALUE;
         for (int right = 0; right < str.length(); right++) {
-            if (map.containsKey(str.charAt(right)) && map.get(str.charAt(right)) >= left) {
-                left = map.get(str.charAt(right)) + 1;
+            char temp = str.charAt(right);
+            if (map.getOrDefault(temp, -1) >= left) {
+                left = map.get(temp) + 1;
             } else {
-                max = Integer.max(max, right - left + 1);
+                max = Math.max(max, right - left + 1);
             }
-            map.put(str.charAt(right), right);
+            map.put(temp, right);
         }
 
         return max;

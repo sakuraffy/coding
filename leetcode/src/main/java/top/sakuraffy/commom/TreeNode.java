@@ -118,6 +118,38 @@ public class TreeNode {
     }
 
     /**
+     * 先序遍历(mirror)
+     * @return
+     */
+    public List<Integer> preorderWithMirror() {
+        List<Integer> result = new ArrayList<>();
+        if (Objects.isNull(this)) {
+            return result;
+        }
+        TreeNode curr = this;
+        while (curr != null) {
+            if (curr.left == null) {
+                result.add(curr.val);
+                curr = curr.right;
+            } else {
+                TreeNode left =  curr.left;
+                while (left.right != null && left.right != curr) {
+                    left = left.right;
+                }
+                if (left.right == null) {
+                    result.add(curr.val);
+                    left.right = curr;
+                    curr = curr.left;
+                } else {
+                    left.right = null;
+                    curr = curr.right;
+                }
+            }
+        }
+        return result;
+    }
+
+    /**
      * 中序遍历
      * @return
      */
@@ -125,6 +157,38 @@ public class TreeNode {
         List<Integer> list = new ArrayList<>();
         inorder(this, list);
         return list;
+    }
+
+    /**
+     * 中序遍历(mirror)
+     * @return
+     */
+    public List<Integer> inorderWithMirror() {
+        List<Integer> result = new ArrayList<>();
+        if (Objects.isNull(this)) {
+            return result;
+        }
+        TreeNode curr = this;
+        while (curr != null) {
+            if (curr.left == null) {
+                result.add(curr.val);
+                curr = curr.right;
+            } else {
+                TreeNode left =  curr.left;
+                while (left.right != null && left.right != curr) {
+                    left = left.right;
+                }
+                if (left.right == null) {
+                    left.right = curr;
+                    curr = curr.left;
+                } else {
+                    result.add(curr.val);
+                    left.right = null;
+                    curr = curr.right;
+                }
+            }
+        }
+        return result;
     }
 
     /**
@@ -163,6 +227,40 @@ public class TreeNode {
         postorder(node.left, list);
         postorder(node.right, list);
         list.add(node.val);
+    }
+
+    /**
+     * 后序遍历(mirror)
+     * @return
+     */
+    public List<Integer> postorderWithMirror() {
+        List<Integer> result = new ArrayList<>();
+        if (Objects.isNull(this)) {
+            return result;
+        }
+        TreeNode dummy = new TreeNode(-1);
+        dummy.left = this;
+        TreeNode curr = dummy;
+        while (curr != null) {
+            if (curr.left == null) {
+                result.add(curr.val);
+                curr = curr.right;
+            } else {
+                TreeNode left =  curr.left;
+                while (left.right != null && left.right != curr) {
+                    left = left.right;
+                }
+                if (left.right == null) {
+                    left.right = curr;
+                    curr = curr.left;
+                } else {
+                    result.add(curr.val);
+                    left.right = null;
+                    curr = curr.right;
+                }
+            }
+        }
+        return result;
     }
 
     /**

@@ -41,6 +41,16 @@ class LinkedListSolutionTest {
     }
 
     @Test
+    void testReverseBetween() {
+        final ListNode head = ListNode.create(Arrays.asList(1,2,3,4,5));
+        final ListNode result = linkedListSolutionUnderTest.reverseBetween(head, 2, 4);
+        assertEquals(Arrays.asList(1,4,3,2,5).toString(), result.toString());
+        final ListNode head1 = ListNode.create(Arrays.asList(1, 2));
+        final ListNode result1 = linkedListSolutionUnderTest.reverseBetween(head1, 1, 4);
+        assertEquals(Arrays.asList(2, 1).toString(), result1.toString());
+    }
+
+    @Test
     void testMergeTwoLists() {
         final ListNode head1 = ListNode.create(Arrays.asList(1, 1, 2, 4, 6, 8));
         final ListNode head2 = ListNode.create(Arrays.asList(3, 4, 5));

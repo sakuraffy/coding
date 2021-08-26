@@ -3,6 +3,7 @@ package top.sakuraffy.solution;
 import top.sakuraffy.commom.ListNode;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author: zhangqiushi
@@ -68,6 +69,41 @@ public class LinkedListSolution {
             dummy.next = head;
             head = next;
         }
+
+        return dummy.next;
+    }
+
+    public ListNode reverseBetween(ListNode head, int m, int n) {
+        if (Objects.isNull(head) || m <= 0 || n <= 0 || m > n) {
+            return head;
+        }
+        ListNode p = head;
+        ListNode dummy = new ListNode(-1);
+        ListNode tail = dummy;
+        int i = 1;
+
+        while (i < m && p != null) {
+            ListNode next = p.next;
+            p.next = null;
+            tail.next = p;
+            tail = p;
+            p = next;
+            i++;
+        }
+
+        ListNode reverseHead = tail;
+        while (i <= n && p != null) {
+            ListNode next = p.next;
+            p.next = reverseHead.next;
+            reverseHead.next = p;
+            if (i == m) {
+                tail = reverseHead.next;
+            }
+            i++;
+            p = next;
+        }
+
+        tail.next = p;
 
         return dummy.next;
     }
