@@ -7,6 +7,10 @@ import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.redisson.config.Config;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
@@ -64,7 +68,7 @@ class SortTest {
 
     @Test
     void testRadixSort() {
-        final int[] result = sortUnderTest.radixSort(new int[]{1,3,2,4,5,6,8,7,9,0});
-        assertArrayEquals(new int[]{0,1,2,3,4,5,6,7,8,9}, result);
+        final int[] result = sortUnderTest.radixSort(new int[]{1,3,2,4,5,6,8,7,0});
+        assertArrayEquals(new int[]{0,1,2,3,4,5,6,7,8}, result);
     }
 }

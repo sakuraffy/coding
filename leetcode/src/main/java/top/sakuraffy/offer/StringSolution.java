@@ -222,7 +222,7 @@ public class StringSolution {
                     if (j - 2 >= 0) {
                         dp[i][j] |= dp[i][j - 2];
                     }
-                    if (i > 0 && j > 1 && ((str.charAt(i - 1) == pattern.charAt(j - 2) || pattern.charAt(j - 2) == '.'))) {
+                    if (i > 0 && j > 1 && (str.charAt(i - 1) == pattern.charAt(j - 2) || pattern.charAt(j - 2) == '.')) {
                         dp[i][j] |= dp[i - 1][j];
                     }
                 } else {

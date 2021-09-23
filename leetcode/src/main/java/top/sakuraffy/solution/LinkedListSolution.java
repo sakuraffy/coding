@@ -2,6 +2,7 @@ package top.sakuraffy.solution;
 
 import top.sakuraffy.commom.ListNode;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -168,5 +169,39 @@ public class LinkedListSolution {
         tail.next = l1 == null ? l2 : l1;
 
         return dummy.next;
+    }
+
+    public ListNode merge(ListNode headA, ListNode headB) {
+        if (Objects.isNull(headA) || Objects.isNull(headB)) {
+            return Objects.isNull(headA) ? headB : headA;
+        }
+        ListNode dummy = new ListNode(-1);
+        ListNode tail = dummy;
+
+        ListNode p1 = headA, p2 = headB;
+        while (p1 != null && p2 != null) {
+            if (p1.val < p2.val) {
+                ListNode nxt = p1.next;
+                p1.next = null;
+                tail.next = p1;
+                tail = p1;
+                p1 = nxt;
+            } else {
+                ListNode nxt = p2.next;
+                p2.next = null;
+                tail.next = p2;
+                tail = p2;
+                p2 = nxt;
+            }
+        }
+        tail.next = p1 == null ? p2 : p1;
+
+        return dummy.next;
+    }
+
+    public static void main(String[] args) {
+        ListNode result = new LinkedListSolution().merge(ListNode.create(Arrays.asList(1,2,5,7,8)),
+                ListNode.create(Arrays.asList(1,3,4)));
+        System.out.println(result.toString());
     }
 }
