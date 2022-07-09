@@ -6,8 +6,7 @@ import top.sakuraffy.commom.ListNode;
 
 import java.util.Arrays;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 class LinkedListSolutionTest {
 
@@ -19,8 +18,38 @@ class LinkedListSolutionTest {
     }
 
     @Test
-    void testAddTwoNumbers() {
+    void testMiddleNode() {
+        final ListNode head = ListNode.create(Arrays.asList(1,2,3,4,5));
+        final ListNode result = linkedListSolutionUnderTest.middleNode(head);
+        assertEquals(Arrays.asList(3,4,5).toString(), result.toString());
 
+        final ListNode head1 = ListNode.create(Arrays.asList(1,2,3,4,5,6));
+        final ListNode result1 = linkedListSolutionUnderTest.middleNode(head1);
+        assertEquals(Arrays.asList(3,4,5,6).toString(), result1.toString());
+    }
+
+    @Test
+    void testHasCycle() {
+        ListNode head = new ListNode(1);
+        ListNode node = new ListNode(2);
+        head.next = node;
+        node.next = head;
+        final boolean result = linkedListSolutionUnderTest.hasCycle(head);
+        assertTrue(result);
+    }
+
+    @Test
+    void testGetDecimalValue() {
+        final ListNode head = ListNode.create(Arrays.asList(1, 1, 1));
+        final int result = linkedListSolutionUnderTest.getDecimalValue(head);
+        assertEquals(7, result);
+    }
+
+    @Test
+    void testDeleteDuplicates() {
+        final ListNode head = ListNode.create(Arrays.asList(1, 1, 1, 2, 3, 3));
+        final ListNode result = linkedListSolutionUnderTest.deleteDuplicates(head);
+        assertEquals(Arrays.asList(1, 2, 3).toString(), result.toString());
     }
 
     @Test

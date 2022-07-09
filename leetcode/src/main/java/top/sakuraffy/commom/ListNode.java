@@ -1,6 +1,7 @@
 package top.sakuraffy.commom;
 
-import org.springframework.stereotype.Component;
+
+import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,9 @@ public class ListNode {
     public Integer val;
     public ListNode next;
 
+    public ListNode() {
+    }
+
     public ListNode(Integer val) {
         this.val = val;
     }
@@ -25,7 +29,7 @@ public class ListNode {
      * @return
      */
     public static ListNode create(List<Integer> list) {
-        if (list == null || list.size() == 0) {
+        if (CollectionUtils.isEmpty(list)) {
             return null;
         }
         ListNode head = null;

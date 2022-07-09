@@ -2,8 +2,6 @@ package top.sakuraffy.solution;
 
 import top.sakuraffy.commom.ListNode;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
 
 /**
@@ -11,6 +9,88 @@ import java.util.Objects;
  * @create: 2021/07/21 20:47
  */
 public class LinkedListSolution {
+
+    /**
+     * 链表的中间结点
+     * @param head 头节点
+     * @return ListNode
+     */
+    public ListNode middleNode(ListNode head) {
+        if (Objects.isNull(head) || Objects.isNull(head.next)) {
+            return head;
+        }
+        ListNode slow = head;
+        ListNode fast = head;
+        while (Objects.nonNull(fast) && Objects.nonNull(fast.next)) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return slow;
+    }
+
+    /**
+     * 链表所表示数字的 十进制值
+     * @param head 链表头
+     * @return int
+     */
+    public int getDecimalValue(ListNode head) {
+        if (Objects.isNull(head)) {
+            return 0;
+        }
+        int res = 0;
+        for (ListNode curr = head; Objects.nonNull(curr); curr = curr.next) {
+            res = (res << 1) + curr.val;
+        }
+        return res;
+    }
+
+    /**
+     * 删除重复节点
+     * @param head 头节点
+     * @return 无重复节点的头节点
+     */
+    public ListNode deleteDuplicates(ListNode head) {
+        // 1. 判空
+        if (Objects.isNull(head) || Objects.isNull(head.next)) {
+            return head;
+        }
+        // 2. 遍历链表，创建虚拟节点，解决第一个相同节点重复的问题
+        ListNode dummy = new ListNode();
+        ListNode tail = dummy;
+        for (ListNode curr = head; Objects.nonNull(curr);) {
+            // 3.寻找相同元素中的最后一个,尾插法插入
+            while (Objects.nonNull(curr.next) && curr.val.equals(curr.next.val)) {
+                curr = curr.next;
+            }
+            tail.next = curr;
+            tail = curr;
+            curr = curr.next;
+        }
+        return dummy.next;
+    }
+
+    /**
+     * 判断链表是否有环
+     * @param head 头节点
+     * @return 是否有环
+     */
+    public boolean hasCycle(ListNode head) {
+        // 1. 判空
+        if (Objects.isNull(head) || Objects.isNull(head.next)) {
+            return false;
+        }
+        // 2. 使用快慢指针判断环
+        ListNode slow = head;
+        ListNode fast = head.next;
+        while (Objects.nonNull(fast) && Objects.nonNull(fast.next)) {
+            if (slow == fast) {
+                return true;
+            }
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return false;
+    }
 
     /**
      * 链表两数相加
@@ -139,69 +219,36 @@ public class LinkedListSolution {
 
     /**
      * 合并两个有序链表
-     * @param l1
-     * @param l2
-     * @return
+     * @param list1 链表1
+     * @param list2 链表2
+     * @return 合并后的链表
      */
-    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
-        if (l1 == null || l2 == null) {
-            return l1 == null ? l2 : l1;
+    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+        // 1. 判空
+        if (Objects.isNull(list1)) {
+            return list2;
         }
-
-        ListNode dummy = new ListNode(-1);
-        ListNode tail = dummy;
-        while (l1 != null && l2 != null) {
-            if (l1.val < l2.val) {
-                ListNode next = l1.next;
-                l1.next = null;
-                tail.next = l1;
-                tail = l1;
-                l1 = next;
-            } else {
-                ListNode next = l2.next;
-                l2.next = null;
-                tail.next = l2;
-                tail = l2;
-                l2 = next;
-            }
-        }
-
-        tail.next = l1 == null ? l2 : l1;
-
-        return dummy.next;
-    }
-
-    public ListNode merge(ListNode headA, ListNode headB) {
-        if (Objects.isNull(headA) || Objects.isNull(headB)) {
-            return Objects.isNull(headA) ? headB : headA;
+        if (Objects.isNull(list2)) {
+            return list1;
         }
         ListNode dummy = new ListNode(-1);
         ListNode tail = dummy;
-
-        ListNode p1 = headA, p2 = headB;
-        while (p1 != null && p2 != null) {
-            if (p1.val < p2.val) {
-                ListNode nxt = p1.next;
-                p1.next = null;
-                tail.next = p1;
-                tail = p1;
-                p1 = nxt;
+        // 2. 寻找较小节点，以尾插法插入
+        while (list1 != null && list2 != null) {
+            if (list1.val < list2.val) {
+                ListNode next = list1.next;
+                tail.next = list1;
+                tail = tail.next;
+                list1 = next;
             } else {
-                ListNode nxt = p2.next;
-                p2.next = null;
-                tail.next = p2;
-                tail = p2;
-                p2 = nxt;
+                ListNode next = list2.next;
+                tail.next = list2;
+                tail = tail.next;
+                list2 = next;
             }
         }
-        tail.next = p1 == null ? p2 : p1;
-
+        // 3. 拼接不空链表
+        tail.next = list1 == null ? list2 : list1;
         return dummy.next;
-    }
-
-    public static void main(String[] args) {
-        ListNode result = new LinkedListSolution().merge(ListNode.create(Arrays.asList(1,2,5,7,8)),
-                ListNode.create(Arrays.asList(1,3,4)));
-        System.out.println(result.toString());
     }
 }
